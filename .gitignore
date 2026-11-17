@@ -1,0 +1,23 @@
+node_modules/
+.env
+.env.*
+!.env.example
+private/
+data/
+auth_info/
+sessions/
+.vercel/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.backup*
+*.bak
+.vercel
+
+# Private backups - never upload
+backup/
+backups/
+*.backup*
+*.before-*
+*backup*

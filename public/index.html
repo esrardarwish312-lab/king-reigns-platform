@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KING REIGNS BOT</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#08090c;
+ color:#eee;
+ font-family:Arial,sans-serif;
+}
+header{
+ text-align:center;
+ padding:28px 15px;
+ background:#0b0c10;
+ border-bottom:1px solid #202329;
+}
+.logo{font-size:35px;color:#00e879;font-weight:bold}
+header p{color:#858b91}
+.container{max-width:620px;margin:auto;padding:20px}
+.card{
+ background:#111216;
+ border:1px solid #292b31;
+ border-radius:22px;
+ padding:22px;
+ margin-bottom:20px;
+}
+h2{color:#00e879;font-size:23px}
+.subtitle{text-align:center;color:#aaa;font-size:18px}
+.server{
+ background:#10251f;
+ border:1px solid #087a48;
+ border-radius:20px;
+ padding:20px;
+ margin:22px 0;
+}
+.server-top{display:flex;justify-content:space-between;align-items:center}
+.green{color:#00e879}
+.small{color:#aaa;line-height:1.8}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+button{
+ cursor:pointer;
+ border:0;
+ border-radius:14px;
+ padding:16px;
+ font-size:16px;
+ font-weight:bold;
+ color:white;
+}
+.green-btn{
+ background:linear-gradient(110deg,#00b95d,#00ed7c);
+ color:white;
+ width:100%;
+ font-size:19px;
+ padding:21px;
+}
+.dark-btn{
+ background:#10251f;
+ border:1px solid #087a48;
+}
+.info{
+ background:#10251f;
+ border:1px solid #087a48;
+ padding:20px;
+ border-radius:18px;
+ margin:25px 0;
+ line-height:1.7;
+ color:#aaa;
+}
+label{display:block;margin:22px 0 10px}
+input{
+ width:100%;
+ padding:19px;
+ border-radius:17px;
+ border:2px solid #303139;
+ background:#202127;
+ color:white;
+ font-size:17px;
+ outline:none;
+}
+input:focus{border-color:#00df70}
+.code{
+ background:#090a0e;
+ border:1px solid #303139;
+ border-radius:18px;
+ padding:30px 15px;
+ text-align:center;
+ color:#888;
+ margin-top:18px;
+ font-size:18px;
+}
+.channel{
+ width:100%;
+ margin-top:18px;
+ background:#10251f;
+ border:1px solid #087a48;
+ color:#00e879;
+}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tile{
+ padding:22px 10px;
+ text-align:center;
+ border-radius:18px;
+ background:#17191f;
+ border:1px solid #303139;
+}
+.tile .icon{font-size:35px}
+.tile h3{font-size:17px}
+.tile.green-tile{border-color:#087a48;background:#10251f}
+.tile.red-tile{border-color:#85252d;background:#281518}
+.feature{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding:15px 0;
+ border-bottom:1px solid #292b31;
+}
+.feature input{width:22px;height:22px;accent-color:#00df70}
+footer{text-align:center;color:#777;padding:30px}
+
+.dashboard-title{
+ text-align:center;
+ margin:35px 0 20px;
+ color:#00e879;
+}
+.feature-card{
+ background:#111216;
+ border:1px solid #292b31;
+ border-radius:18px;
+ padding:18px;
+ margin-bottom:14px;
+}
+.feature-row{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:12px;
+}
+.feature-name{font-weight:bold;font-size:17px}
+.feature-desc{color:#999;font-size:13px;margin-top:7px}
+.switch{
+ width:48px;
+ height:26px;
+ position:relative;
+ flex-shrink:0;
+}
+.switch input{display:none}
+.slider{
+ position:absolute;
+ inset:0;
+ background:#383a40;
+ border-radius:20px;
+ cursor:pointer;
+ transition:.2s;
+}
+.slider:before{
+ content:"";
+ position:absolute;
+ width:20px;
+ height:20px;
+ left:3px;
+ top:3px;
+ background:white;
+ border-radius:50%;
+ transition:.2s;
+}
+.switch input:checked + .slider{background:#00c96b}
+.switch input:checked + .slider:before{transform:translateX(22px)}
+.prototype-note{
+ color:#aaa;
+ background:#10251f;
+ border:1px solid #087a48;
+ border-radius:12px;
+ padding:13px;
+ font-size:13px;
+ line-height:1.6;
+}
+
+
+.auth-card{background:#111216;border:1px solid #087a48;border-radius:22px;padding:22px;margin-bottom:20px}
+.auth-card h2{text-align:center}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.auth-tabs button{background:#202127;border:1px solid #087a48}
+.auth-tabs button.active{background:#087a48}
+.auth-message{text-align:center;color:#00e879;min-height:24px;margin-top:12px}
+.auth-user{color:#00e879;text-align:center;margin:12px 0}
+
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="logo">👑 KING REIGNS BOT</div>
+ <p>WhatsApp Bot Control Platform</p>
+</header>
+
+<main class="container">
+
+ <section class="auth-card" id="simpleConnectCard">
+  <h2>👑 KING REIGNS</h2>
+  <p class="subtitle">Connect your WhatsApp in a few simple steps.</p>
+
+  <div class="info">
+    <h3 style="color:#00e879">📱 Simple Setup</h3>
+    <p class="small">1. Enter your own WhatsApp number below.</p>
+    <p class="small">2. Confirm that you own or are authorized to manage the account.</p>
+    <p class="small">3. Tap Connect to receive your pairing code.</p>
+  </div>
+</section>
+
+
+ <div class="card">
+  <h2 style="text-align:center">KING REIGNS</h2>
+  <p class="subtitle">Generate Your Pairing Code</p>
+
+  <div class="server">
+   <div class="server-top">
+    <div>
+     <h3>🖥️ Server 1</h3>
+     <p class="small"><span class="green">●</span> Active: <span id="serverStatus">Checking...</span></p>
+     <p class="small">👥 Connected Users: <span id="connectedUsers">0</span></p>
+    <p class="small">👥 User Limit: <span id="userLimit">30</span></p>
+    <p class="small">🟢 Available Slots: <span id="availableSlots">30</span></p>
+    </div>
+    <button class="dark-btn" onclick="document.getElementById('serverDialog').showModal()">Change</button>
+   </div>
+  </div>
+
+  <div class="info">
+   <h3 style="color:#00e879">🟢 Quick Setup</h3>
+   Server selection is automatic. Enter your own WhatsApp number to request a pairing code. Only connect an account you own or are authorized to manage.
+  </div>
+
+  <label>WhatsApp Number</label>
+  <input id="phone" type="tel" placeholder="+937XXXXXXXX">
+
+  <p class="small">💡 Include your country code (e.g. +93 for Afghanistan). Never enter someone else’s number without permission.</p>
+
+  <label class="small">
+        <input type="checkbox" id="consent">
+        I own this WhatsApp account and agree to connect it. I understand that my phone number and connection status may be visible to the platform owner.
+        </label>
+        <button class="green-btn" onclick="connectBot()">🔑 Generate Pair Code</button>
+
+  <div class="code" id="code">
+   Your pairing code will appear here
+  </div>
+
+
+  <button class="channel" onclick="alert('WhatsApp Channel link will be added later.')">
+   ☎ Join Our WhatsApp Channel
+  </button>
+ </div>
+
+ <div class="tiles">
+  <div class="tile red-tile">
+   <div class="icon">⚠️</div>
+   <h3>WhatsApp Ban</h3>
+   <p class="small">Account Help</p>
+  </div>
+  <div class="tile green-tile">
+   <div class="icon">🛡️</div>
+   <h3>WhatsApp Unban</h3>
+   <p class="small">Account Support</p>
+  </div>
+ </div>
+
+ 
+
+
+
+<h2 class="dashboard-title">👑 FEATURES DASHBOARD</h2>
+
+<div class="prototype-note">
+ ⚙️ Feature controls preview — these switches are saved in this browser.
+ They do not control WhatsApp until the secure backend is connected.
+</div>
+
+<div id="featuresDashboard">
+
+ <div class="feature-card">
+  <div class="feature-row">
+   <div>
+    <div class="feature-name">🤖 AI Assistant</div>
+    <div class="feature-desc">AI replies when a message starts with AI.</div>
+   <button class="dark-btn" style="margin-top:12px;width:100%"
+   onclick="document.getElementById('aiSettingsDialog').showModal()">
+   ⚙️ AI Settings
+   </button>
+
+   </div>
+   <label class="switch">
+    <input type="checkbox" data-feature="ai">
+    <span class="slider"></span>
+   </label>
+  </div>
+ </div>
+
+ <div class="feature-card">
+  <div class="feature-row">
+   <div>
+    <div class="feature-name">💬 Auto Reply</div>
+    <div class="feature-desc">Automatic replies to incoming messages.</div>
+    <button class="dark-btn" style="margin-top:12px;width:100%"
+    onclick="document.getElementById('autoReplyDialog').showModal()">
+    ⚙️ Auto Reply Settings
+    </button>
+
+   </div>
+   <label class="switch">
+    <input type="checkbox" data-feature="autoreply">
+    <span class="slider"></span>
+   </label>
+  </div>
+ </div>
+
+ <div class="feature-card">
+  <div class="feature-row">
+   <div>
+    <div class="feature-name">👋 Welcome Message</div>
+    <div class="feature-desc">Welcome message for new users.</div>
+    <button class="dark-btn" style="margin-top:12px;width:100%"
+    onclick="document.getElementById('welcomeDialog').showModal()">
+    ⚙️ Welcome Settings
+    </button>
+
+   </div>
+   <label class="switch">
+    <input type="checkbox" data-feature="welcome">
+    <span class="slider"></span>
+   </label>
+  </div>
+ </div>
+
+ <div class="feature-card">
+  <div class="feature-row">
+   <div>
+    <div class="feature-name">🔗 Anti-Link</div>
+    <div class="feature-desc">Group link moderation settings.</div>
+    <button class="dark-btn" style="margin-top:12px;width:100%"
+    onclick="document.getElementById('antiLinkDialog').showModal()">
+    ⚙️ Anti-Link Settings
+    </button>
+
+   </div>
+   <label class="switch">
+    <input type="checkbox" data-feature="antilink">
+    <span class="slider"></span>
+   </label>
+  </div>
+ </div>
+
+ <div class="feature-card">
+  <div class="feature-row">
+   <div>
+    <div class="feature-name">🛡️ Anti-Spam</div>
+    <div class="feature-desc">Spam protection settings.</div>
+    <button class="dark-btn" style="margin-top:12px;width:100%"
+    onclick="document.getElementById('antiSpamDialog').showModal()">
+    ⚙️ Anti-Spam Settings
+    </button>
+
+   </div>
+   <label class="switch">
+    <input type="checkbox" data-feature="antispam">
+    <span class="slider"></span>
+   </label>
+  </div>
+ </div>
+
+</div>
+
+
+<dialog id="aiSettingsDialog" style="
+ background:#111216;color:#eee;border:1px solid #087a48;
+ border-radius:18px;padding:24px;width:90%;max-width:420px;
+">
+ <h2>🤖 AI Assistant Settings</h2>
+
+ <label>🌐 Reply Language</label>
+ <select id="aiLanguage" style="width:100%;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px">
+  <option value="same">Same as incoming message</option>
+  <option value="pashto">Pashto</option>
+  <option value="dari">Dari</option>
+  <option value="english">English</option>
+ </select>
+
+ <label>💬 Reply Style</label>
+ <select id="aiStyle" style="width:100%;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px">
+  <option value="friendly">Friendly</option>
+  <option value="short">Short</option>
+  <option value="formal">Formal</option>
+ </select>
+
+ <button class="green-btn" style="margin-top:20px" onclick="saveAISettings()">
+ Save Settings
+ </button>
+
+ <button class="dark-btn" style="width:100%;margin-top:10px"
+ onclick="document.getElementById('aiSettingsDialog').close()">
+ Close
+ </button>
+</dialog>
+
+<script>
+function loadAISettings(){
+ document.getElementById("aiLanguage").value =
+  localStorage.getItem("king_reigns_ai_language") || "same";
+ document.getElementById("aiStyle").value =
+  localStorage.getItem("king_reigns_ai_style") || "friendly";
+}
+
+function saveAISettings(){
+ localStorage.setItem(
+  "king_reigns_ai_language",
+  document.getElementById("aiLanguage").value
+ );
+ localStorage.setItem(
+  "king_reigns_ai_style",
+  document.getElementById("aiStyle").value
+ );
+ alert("AI settings saved in this browser!");
+ document.getElementById("aiSettingsDialog").close();
+}
+
+loadAISettings();
+</script>
+
+
+<dialog id="autoReplyDialog" style="
+ background:#111216;color:#eee;border:1px solid #087a48;
+ border-radius:18px;padding:24px;width:90%;max-width:420px;
+">
+ <h2>💬 Auto Reply Settings</h2>
+
+ <label>📝 Your Auto Reply Message</label>
+ <textarea id="autoReplyText" maxlength="500"
+ placeholder="Write your automatic reply..."
+ style="width:100%;min-height:120px;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px;resize:vertical"></textarea>
+
+ <p class="small">Maximum 500 characters.</p>
+
+ <button class="green-btn" style="margin-top:15px"
+ onclick="saveAutoReplySettings()">Save Settings</button>
+
+ <button class="dark-btn" style="width:100%;margin-top:10px"
+ onclick="document.getElementById('autoReplyDialog').close()">Close</button>
+</dialog>
+
+<script>
+function loadAutoReplySettings(){
+ document.getElementById("autoReplyText").value =
+  localStorage.getItem("king_reigns_auto_reply_text") || "";
+}
+
+function saveAutoReplySettings(){
+ const message = document.getElementById("autoReplyText").value.trim();
+
+ localStorage.setItem("king_reigns_auto_reply_text", message);
+
+ alert("Auto Reply settings saved in this browser!");
+ document.getElementById("autoReplyDialog").close();
+}
+
+loadAutoReplySettings();
+</script>
+
+<dialog id="welcomeDialog" style="
+ background:#111216;color:#eee;border:1px solid #087a48;
+ border-radius:18px;padding:24px;width:90%;max-width:420px;
+">
+ <h2>👋 Welcome Message Settings</h2>
+
+ <label>📝 Welcome Message</label>
+ <textarea id="welcomeText" maxlength="500"
+ placeholder="Write your welcome message..."
+ style="width:100%;min-height:130px;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px;resize:vertical"></textarea>
+
+ <p class="small">Maximum 500 characters.</p>
+
+ <button class="green-btn" style="margin-top:15px"
+ onclick="saveWelcomeSettings()">Save Settings</button>
+
+ <button class="dark-btn" style="width:100%;margin-top:10px"
+ onclick="document.getElementById('welcomeDialog').close()">Close</button>
+</dialog>
+
+<script>
+function loadWelcomeSettings(){
+ document.getElementById("welcomeText").value =
+  localStorage.getItem("king_reigns_welcome_text") || "";
+}
+
+function saveWelcomeSettings(){
+ const message = document.getElementById("welcomeText").value.trim();
+ localStorage.setItem("king_reigns_welcome_text", message);
+ alert("Welcome message saved in this browser!");
+ document.getElementById("welcomeDialog").close();
+}
+
+loadWelcomeSettings();
+</script>
+
+<dialog id="antiLinkDialog" style="
+ background:#111216;color:#eee;border:1px solid #087a48;
+ border-radius:18px;padding:24px;width:90%;max-width:420px;
+">
+ <h2>🔗 Anti-Link Settings</h2>
+
+ <label>Link Management Mode</label>
+ <select id="antiLinkMode" style="width:100%;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px">
+  <option value="warn">Warn member</option>
+  <option value="notify">Notify admins</option>
+  <option value="review">Review manually</option>
+ </select>
+
+ <label>📝 Warning Message</label>
+ <textarea id="antiLinkMessage" maxlength="300"
+ placeholder="Please don't share links in this group."
+ style="width:100%;min-height:100px;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px;resize:vertical"></textarea>
+
+ <button class="green-btn" style="margin-top:15px"
+ onclick="saveAntiLinkSettings()">Save Settings</button>
+
+ <button class="dark-btn" style="width:100%;margin-top:10px"
+ onclick="document.getElementById('antiLinkDialog').close()">Close</button>
+</dialog>
+
+<script>
+function loadAntiLinkSettings(){
+ document.getElementById("antiLinkMode").value =
+  localStorage.getItem("king_reigns_antilink_mode") || "warn";
+
+ document.getElementById("antiLinkMessage").value =
+  localStorage.getItem("king_reigns_antilink_message") ||
+  "Please don't share links in this group.";
+}
+
+function saveAntiLinkSettings(){
+ localStorage.setItem(
+  "king_reigns_antilink_mode",
+  document.getElementById("antiLinkMode").value
+ );
+
+ localStorage.setItem(
+  "king_reigns_antilink_message",
+  document.getElementById("antiLinkMessage").value.trim()
+ );
+
+ alert("Anti-Link settings saved in this browser!");
+ document.getElementById("antiLinkDialog").close();
+}
+
+loadAntiLinkSettings();
+</script>
+
+<dialog id="antiSpamDialog" style="
+ background:#111216;color:#eee;border:1px solid #087a48;
+ border-radius:18px;padding:24px;width:90%;max-width:420px;
+">
+ <h2>🛡️ Anti-Spam Settings</h2>
+
+ <label>Repeated Message Limit</label>
+ <select id="spamLimit" style="width:100%;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px">
+  <option value="3">3 repeated messages</option>
+  <option value="5">5 repeated messages</option>
+  <option value="7">7 repeated messages</option>
+ </select>
+
+ <label>⏱️ Detection Period</label>
+ <select id="spamPeriod" style="width:100%;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px">
+  <option value="10">10 seconds</option>
+  <option value="20">20 seconds</option>
+  <option value="30">30 seconds</option>
+ </select>
+
+ <label>📝 Warning Message</label>
+ <textarea id="spamMessage" maxlength="300"
+ placeholder="Please avoid sending repeated messages."
+ style="width:100%;min-height:90px;padding:14px;background:#202127;color:white;border:1px solid #303139;border-radius:12px;resize:vertical"></textarea>
+
+ <button class="green-btn" style="margin-top:15px"
+ onclick="saveAntiSpamSettings()">Save Settings</button>
+
+ <button class="dark-btn" style="width:100%;margin-top:10px"
+ onclick="document.getElementById('antiSpamDialog').close()">Close</button>
+</dialog>
+
+<script>
+function loadAntiSpamSettings(){
+ document.getElementById("spamLimit").value =
+  localStorage.getItem("king_reigns_spam_limit") || "3";
+
+ document.getElementById("spamPeriod").value =
+  localStorage.getItem("king_reigns_spam_period") || "10";
+
+ document.getElementById("spamMessage").value =
+  localStorage.getItem("king_reigns_spam_message") ||
+  "Please avoid sending repeated messages.";
+}
+
+function saveAntiSpamSettings(){
+ localStorage.setItem(
+  "king_reigns_spam_limit",
+  document.getElementById("spamLimit").value
+ );
+
+ localStorage.setItem(
+  "king_reigns_spam_period",
+  document.getElementById("spamPeriod").value
+ );
+
+ localStorage.setItem(
+  "king_reigns_spam_message",
+  document.getElementById("spamMessage").value.trim()
+ );
+
+ alert("Anti-Spam settings saved in this browser!");
+ document.getElementById("antiSpamDialog").close();
+}
+
+loadAntiSpamSettings();
+</script>
+
+<dialog id="serverDialog" style="
+ background:#111216;
+ color:#eee;
+ border:1px solid #087a48;
+ border-radius:18px;
+ padding:25px;
+ width:85%;
+ max-width:380px;
+">
+ <h2>👑 Select Server</h2>
+ <p style="color:#aaa">Choose an available server.</p>
+ <button class="green-btn" onclick="document.getElementById('serverDialog').close()">
+ 🟢 Server 1 — Active
+ </button>
+ <button class="dark-btn" style="width:100%;margin-top:12px"
+ onclick="document.getElementById('serverDialog').close()">
+ Close
+ </button>
+</dialog>
+</main>
+
+<footer>
+ 👑 KING REIGNS BOT © 2026
+</footer>
+
+
+<script>
+
+
+let authMode = "login";
+async function loadServerStatus() {
+    const statusEl = document.getElementById("serverStatus");
+
+    try {
+        const response = await fetch("/api/status", {
+            cache: "no-store"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error("Server offline");
+        }
+
+        statusEl.textContent = data.status;
+
+        document.getElementById("connectedUsers").textContent =
+            data.connectedUsers;
+
+        document.getElementById("userLimit").textContent =
+            data.userLimit;
+
+        document.getElementById("availableSlots").textContent =
+            data.availableSlots;
+    } catch (error) {
+        statusEl.textContent = "Offline";
+    }
+}
+
+
+async function loadMySession() {
+    const phoneEl = document.getElementById("mySessionPhone");
+    const statusEl = document.getElementById("mySessionStatus");
+
+    try {
+        const response = await fetch("/api/my-session", {
+            credentials: "same-origin",
+            cache: "no-store"
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Could not load session");
+        }
+
+        if (!data.hasSession) {
+            phoneEl.textContent = "No WhatsApp account connected yet.";
+            statusEl.textContent = "";
+            return;
+        }
+
+        phoneEl.textContent = "WhatsApp: " + data.session.phone;
+        statusEl.textContent = "Connection: " + data.session.status;
+    } catch (error) {
+        phoneEl.textContent = "Session status unavailable.";
+        statusEl.textContent = "";
+    }
+}
+
+loadServerStatus();
+
+
+
+async function connectBot() {
+    const phone = document.getElementById("phone").value.trim();
+    const box = document.getElementById("code");
+
+    if (!/^\+?[0-9]{8,15}$/.test(phone)) {
+        box.textContent = "Enter a valid phone number.";
+        return;
+    }
+
+    if (!document.getElementById("consent").checked) {
+        box.textContent = "Please confirm account ownership.";
+        return;
+    }
+
+    box.textContent = "Requesting pairing code...";
+
+    try {
+        const response = await fetch("/api/pair", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: "same-origin",
+            body: JSON.stringify({
+                phone: phone,
+                consent: true
+            })
+        });
+
+        const rawResponse = await response.text();
+        let data;
+
+        try {
+            data = JSON.parse(rawResponse);
+        } catch {
+            data = {
+                success: false,
+                message: response.status === 429
+                    ? "Too many requests. Please wait before trying again."
+                    : "Server returned an invalid response. Please try again."
+            };
+        }
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Pairing failed");
+        }
+
+        box.textContent = "Pairing Code: " + data.code;
+
+
+
+    } catch (error) {
+        box.textContent = error.message;
+    }
+}
+</script>
+
+
+<script>
+document.querySelectorAll("[data-feature]").forEach((toggle) => {
+    const key = "king_reigns_" + toggle.dataset.feature;
+
+    toggle.checked = localStorage.getItem(key) === "true";
+
+    toggle.addEventListener("change", () => {
+        localStorage.setItem(key, toggle.checked);
+    });
+});
+</script>
+</body>
+</html>
